@@ -11,7 +11,7 @@ class Image
      end 
   end 
 
- def is_1? row, col
+  def is_1? row, col
     if @data [row][col]==1 
       return true
     end
@@ -28,28 +28,40 @@ class Image
       return true
     end
     return false
- end 
+  end 
 
- def blur
-  new_data = [] 
-  @data.each.with_index do |row, r|
-   new_data << row.clone 
-    row.each.with_index do |val, c|
-      new_data[r][c] = 1 if is_1?(r,c)  
-    end
-  end
-  @data = new_data 
- end
-
+  def blur distance = 1
+    distance.times do 
+      new_data = [] 
+      @data.each.with_index do |row, r|
+       new_data << row.clone 
+        row.each.with_index do |val, c|
+          new_data[r][c] = 1 if is_1?(r,c)  
+        end
+      end
+      @data = new_data 
+    end 
+  end  
 end 
 
 
 
 image = Image.new([
-  [0, 0, 0, 0],
-  [0, 1, 0, 0],
-  [0, 0, 0, 1],
-  [0, 0, 0, 0]
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ])
-image.blur
+image.blur 4
 image.output_image
